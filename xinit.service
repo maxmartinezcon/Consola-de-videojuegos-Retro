@@ -1,0 +1,23 @@
+[Unit]
+Description=Start X11 session with xinit
+After=sound.target
+Before=network.target systemd-user-sessions.service 
+
+[Service]
+Environment=PULSE_RUNTIME_PATH=/run/user/1000/pulse
+#ExecStartPre=/bin/bash -c 'pgrep -x pulseaudio || /usr/bin/pulseaudio'
+#ExecStartPre=/home/han/splash.sh
+User=han
+Type=simple
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/han/.Xauthority
+Environment=HOME=/home/han
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+#Environmetn=PULSE_SERVER=unix:/run/user/%U/pulse/native
+WorkingDirectory=/home/han
+ExecStart=/home/han/introAttract.sh
+#StandardOutput=journal
+#StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
